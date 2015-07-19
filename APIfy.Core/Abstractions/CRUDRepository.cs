@@ -148,6 +148,7 @@ namespace APIfy.Core.Abstractions
                 {
                     id = (TKey)property.GetValue(model);
                     isValid = true;
+                    break;
                 }
             }
 
