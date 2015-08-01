@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APIfy.Core.Abstractions
+namespace APIfy.Core.Repositories
 {
-	public class MappedRepository<TModel, TKey, TDto> : CRUDRepository<TModel, TKey>
+	public class Repository<TModel, TKey, TDto> : DbRepository<TModel, TKey>
 		where TDto : class
 		where TModel : class
 	{
@@ -18,7 +18,7 @@ namespace APIfy.Core.Abstractions
 		private Expression<Func<TDto, TModel>> _toModelMapper;
 		private Func<TDto, TModel> _compiledToModelMapper;
 
-		public MappedRepository(DbContext dbContext,
+		public Repository(DbContext dbContext,
 			Expression<Func<TModel, TDto>> toDtoMapper,
 			Expression<Func<TDto, TModel>> fromDtoMapper)
 			: base(dbContext)

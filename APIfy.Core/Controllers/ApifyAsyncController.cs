@@ -1,25 +1,20 @@
-﻿using APIfy.Core.Handlers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Http;
+using APIfy.Core.Repositories;
 
-namespace APIfy.Core.Abstractions
+namespace APIfy.Core.Controllers
 {
-    public class CRUDAsyncController<TModel, TKey> : ApiController where TModel : class
+    public class ApifyAsyncController<TModel, TKey> : BaseApifyController<TModel, TKey, object>
+		where TModel : class
     {
-        protected CRUDRepository<TModel, TKey> ControllerRepo { get; private set; }
+		public ApifyAsyncController(DbContext dbContext)
+			: base(dbContext)
+		{
 
-        protected UnitOfWork UnitOfWork { get; private set; }
-
-        protected ExceptionHandler OnException;
-
-        public CRUDAsyncController(DbContext db)
-        {
-            ControllerRepo = new CRUDRepository<TModel, TKey>(db);
-            UnitOfWork = new UnitOfWork(db);
-        }
+		}
 
         public virtual async Task<IHttpActionResult> Get()
         {
@@ -50,8 +45,7 @@ namespace APIfy.Core.Abstractions
             }
             catch (Exception ex)
             {
-                if (OnException != null)
-                    OnException(ex);
+                OnException(ex);
                 return InternalServerError(ex);
             }
             return Ok();
@@ -72,8 +66,7 @@ namespace APIfy.Core.Abstractions
             }
             catch (Exception ex)
             {
-                if (OnException != null)
-                    OnException(ex);
+                OnException(ex);
 
                 return InternalServerError(ex);
             }
@@ -92,16 +85,6 @@ namespace APIfy.Core.Abstractions
                 return InternalServerError(ex);
             }
             return Ok();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                UnitOfWork.Dispose();
-            }
-
-            base.Dispose(disposing);
         }
     }
 }

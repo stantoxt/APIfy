@@ -59,12 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\CRUDAsyncController.cs" />
-    <Compile Include="Abstractions\CRUDController.cs" />
-    <Compile Include="Abstractions\CRUDRepository.cs" />
-    <Compile Include="Abstractions\MappedRepository.cs" />
-    <Compile Include="Abstractions\UnitOfWork.cs" />
-    <Compile Include="Handlers\ExceptionHandler.cs" />
+    <Compile Include="Controllers\ApifyAsyncController.cs" />
+    <Compile Include="Controllers\ApifyController.cs" />
+    <Compile Include="Controllers\BaseApifyController.cs" />
+    <Compile Include="Repositories\DbRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Exceptions\FormattedDbEntityValidationException .cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +72,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

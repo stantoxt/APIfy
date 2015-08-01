@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace APIfy.Core.Abstractions
+namespace APIfy.Core.Repositories
 {
-    public class CRUDRepository<TModel, TKey> where TModel : class 
+    public class DbRepository<TModel, TKey> where TModel : class 
     {
         public TModel Add(TModel model)
         {
@@ -114,7 +114,7 @@ namespace APIfy.Core.Abstractions
             });
         }
 
-        public CRUDRepository(DbContext db)
+        public DbRepository(DbContext db)
         {
             _db = db;
             _table = _db.Set<TModel>();

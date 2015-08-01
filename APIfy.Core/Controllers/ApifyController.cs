@@ -1,24 +1,19 @@
-﻿using APIfy.Core.Handlers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web.Http;
+using APIfy.Core.Repositories;
 
-namespace APIfy.Core.Abstractions
+namespace APIfy.Core.Controllers
 {
-    public class CRUDController<TModel, TKey> : ApiController where TModel : class
+    public class ApifyController<TModel, TKey> : BaseApifyController<TModel, TKey, object>
+		where TModel : class
     {
-        protected CRUDRepository<TModel, TKey> ControllerRepo { get; private set; }
+		public ApifyController(DbContext dbContext)
+			: base(dbContext)
+		{
 
-        protected UnitOfWork UnitOfWork { get; private set; }
-
-        protected ExceptionHandler OnException;
-
-        public CRUDController(DbContext db)
-        {
-             ControllerRepo = new CRUDRepository<TModel, TKey>(db);
-             UnitOfWork = new UnitOfWork(db);
-        }
+		}
 
         public virtual IHttpActionResult Get()
         {
@@ -49,8 +44,7 @@ namespace APIfy.Core.Abstractions
             }
             catch(Exception ex)
             {
-                if (OnException != null)
-                    OnException(ex);
+                OnException(ex);
                 return InternalServerError(ex);
             }
             return Ok();
@@ -71,8 +65,7 @@ namespace APIfy.Core.Abstractions
             }
             catch (Exception ex)
             {
-                if (OnException != null)
-                    OnException(ex);
+                OnException(ex);
 
                 return InternalServerError(ex);
             }
@@ -91,16 +84,6 @@ namespace APIfy.Core.Abstractions
                 return InternalServerError(ex);
             }
             return Ok();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if(disposing)
-            {
-                UnitOfWork.Dispose();
-            }
-
-            base.Dispose(disposing);
         }
     }
 }

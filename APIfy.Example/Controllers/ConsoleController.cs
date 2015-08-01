@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
-using APIfy.Core.Abstractions;
 using APIfy.Database.Contexts;
 using APIfy.Database.Models;
 using APIfy.Example.Filters;
+using APIfy.Core.Controllers;
 
 namespace APIfy.Example.Controllers
 {
-    public class ModuleController : CRUDAsyncController<Module, int>
+    public class ModuleController : ApifyAsyncController<Module, int>
     {
         public ModuleController()
             : base(new ApifyContext())

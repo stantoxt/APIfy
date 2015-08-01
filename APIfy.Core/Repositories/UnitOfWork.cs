@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Threading.Tasks;
 
-namespace APIfy.Core.Abstractions
+namespace APIfy.Core.Repositories
 {
     public class UnitOfWork : IDisposable
     {
