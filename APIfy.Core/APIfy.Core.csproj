@@ -62,6 +62,7 @@
     <Compile Include="Abstractions\CRUDAsyncController.cs" />
     <Compile Include="Abstractions\CRUDController.cs" />
     <Compile Include="Abstractions\CRUDRepository.cs" />
+    <Compile Include="Abstractions\MappedRepository.cs" />
     <Compile Include="Abstractions\UnitOfWork.cs" />
     <Compile Include="Handlers\ExceptionHandler.cs" />
     <Compile Include="Exceptions\FormattedDbEntityValidationException .cs" />
