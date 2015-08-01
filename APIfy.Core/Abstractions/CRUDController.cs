@@ -56,27 +56,6 @@ namespace APIfy.Core.Abstractions
             return Ok();
         }
 
-        public virtual IHttpActionResult Put(TKey id, [FromBody]TModel value)
-        {
-            try
-            {
-                if (ModelState.IsValid) {
-                    ControllerRepo.Update(id, value);
-                    UnitOfWork.SaveChanges();
-                    return Ok();
-                }
-
-                return BadRequest(ModelState);
-            }
-            catch(Exception ex)
-            {
-                if (OnException != null)
-                    OnException(ex);
-
-                return InternalServerError(ex);
-            }
-        }
-
         public virtual IHttpActionResult Put([FromBody]TModel value)
         {
             try

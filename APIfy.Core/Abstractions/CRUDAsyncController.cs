@@ -57,28 +57,6 @@ namespace APIfy.Core.Abstractions
             return Ok();
         }
 
-        public virtual async Task<IHttpActionResult> Put(TKey id, [FromBody]TModel value)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    await ControllerRepo.UpdateAsync(id, value);
-                    await UnitOfWork.SaveChangesAsync();
-                    return Ok();
-                }
-
-                return BadRequest(ModelState);
-            }
-            catch (Exception ex)
-            {
-                if (OnException != null)
-                    OnException(ex);
-
-                return InternalServerError(ex);
-            }
-        }
-
         public virtual async Task<IHttpActionResult> Put([FromBody]TModel value)
         {
             try

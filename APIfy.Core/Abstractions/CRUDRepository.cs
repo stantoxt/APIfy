@@ -98,70 +98,19 @@ namespace APIfy.Core.Abstractions
             return _table.FindAsync(id);
         }
 
-        public TModel Update(TKey id, TModel model, bool skipNullOrWhitespace = true)
+        public TModel Update(TModel model)
         {
-            TModel dbEntry = Get(id);
+            if (model == null)
+                throw new Exception(string.Format("The model cannot be null."));
 
-            if (dbEntry != null)
-            {
-                Type type = model.GetType();
-                PropertyInfo[] properties = type.GetProperties();
-
-                for (int i = 0, length = properties.Length; i < length; i++)
-                {
-                    PropertyInfo property = properties[i];
-                    if (!property.Name.Equals("id", StringComparison.OrdinalIgnoreCase) && !property.Name.Equals(string.Format("{0}id", type.Name), StringComparison.OrdinalIgnoreCase))
-                    {
-                        bool isNullOrEmpty = false;
-
-                        if (property.PropertyType == typeof(string))
-                            isNullOrEmpty = string.IsNullOrWhiteSpace((string)property.GetValue(model)) && skipNullOrWhitespace;
-
-                        if (property.GetValue(dbEntry) != property.GetValue(model) && property.GetValue(model) != null && !isNullOrEmpty)
-                            property.SetValue(dbEntry, property.GetValue(model, null));
-
-                    }
-                }
-            }
-
-            return dbEntry;
+            _db.Entry(model).State = EntityState.Modified;
+            return model;
         }
 
-        public Task<TModel> UpdateAsync(TKey id, TModel model, bool skipNullOrWhitespace = true)
+        public Task<TModel> UpdateAsync(TModel model)
         {
             return Task.Run(() => {
-                return Update(id, model, skipNullOrWhitespace);
-            });
-        }
-
-        public TModel Update(TModel model, bool skipNullOrWhitespace = true)
-        {
-            TKey id = default(TKey);
-
-            Type type = model.GetType();
-            PropertyInfo[] properties = type.GetProperties();
-            bool isValid = false;
-
-            foreach (PropertyInfo property in properties)
-            {
-                if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase) || property.Name.Equals(string.Format("{0}id", type.Name), StringComparison.OrdinalIgnoreCase))
-                {
-                    id = (TKey)property.GetValue(model);
-                    isValid = true;
-                    break;
-                }
-            }
-
-            if (!isValid)
-                throw new Exception(string.Format("Could not determine primary key member. Please use the standard naming 'Id or {0}Id', or use the update method overload with explicit passing of the Id.", type.Name));
-
-            return Update(id, model, skipNullOrWhitespace);
-        }
-
-        public Task<TModel> UpdateAsync(TModel model, bool skipNullOrWhitespace = true)
-        {
-            return Task.Run(() => {
-                return Update(model, skipNullOrWhitespace);
+                return Update(model);
             });
         }
 
