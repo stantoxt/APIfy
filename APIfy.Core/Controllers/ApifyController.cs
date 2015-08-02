@@ -9,11 +9,9 @@ namespace APIfy.Core.Controllers
     public class ApifyController<TModel, TKey> : BaseApifyController<TModel, TKey, object>
 		where TModel : class
     {
-		public ApifyController(DbContext dbContext)
-			: base(dbContext)
-		{
-
-		}
+        public ApifyController(DbContext dbContext)
+            : base(dbContext)
+        { }
 
         public virtual IHttpActionResult Get()
         {

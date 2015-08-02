@@ -11,6 +11,15 @@ namespace APIfy.Core.Repositories
 {
     public class DbRepository<TModel, TKey> where TModel : class 
     {
+        private DbContext _db;
+        private DbSet<TModel> _table;
+
+        public DbRepository(DbContext db)
+        {
+            _db = db;
+            _table = _db.Set<TModel>();
+        }
+
         public TModel Add(TModel model)
         {
             return _table.Add(model);
@@ -113,14 +122,5 @@ namespace APIfy.Core.Repositories
                 return Update(model);
             });
         }
-
-        public DbRepository(DbContext db)
-        {
-            _db = db;
-            _table = _db.Set<TModel>();
-        }
-
-        private DbContext _db;
-        private DbSet<TModel> _table;
     }
 }

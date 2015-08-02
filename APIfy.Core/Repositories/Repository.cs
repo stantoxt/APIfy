@@ -66,19 +66,19 @@ namespace APIfy.Core.Repositories
             return base.Find(predicate).Select(_toDtoMapper).ToList();
         }
 
-        public IEnumerable<TDto> Get()
+        new public IEnumerable<TDto> Get()
         {
             return base.Get().Select(_toDtoMapper).ToList();
         }
 
-        public Task<IEnumerable<TDto>> GetAsync()
+        new public Task<IEnumerable<TDto>> GetAsync()
         {
             return Task.Run(() => {
                 return Get();
             });
         }
 
-        public TDto Get(TKey id)
+        new public TDto Get(TKey id)
         {
             var result = base.Get(id);
 
@@ -90,7 +90,7 @@ namespace APIfy.Core.Repositories
 			return _compiledToDtoMapper.Invoke(result);
         }
 
-        public Task<TDto> GetAsync(TKey id)
+        new public Task<TDto> GetAsync(TKey id)
         {
             return Task.Run(() =>
 			{
