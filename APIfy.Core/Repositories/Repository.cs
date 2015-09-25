@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace APIfy.Core.Repositories
 {
-	public class Repository<TModel, TKey, TDto> : DbRepository<TModel, TKey>
+    public class Repository<TModel, TKey, TDto> : DbRepository<TModel, TKey>
 		where TDto : class
 		where TModel : class
 	{

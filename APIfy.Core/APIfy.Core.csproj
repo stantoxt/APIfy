@@ -65,7 +65,7 @@
     <Compile Include="Repositories\DbRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
-    <Compile Include="Exceptions\FormattedDbEntityValidationException .cs" />
+    <Compile Include="Exceptions\FormattedDbEntityValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
