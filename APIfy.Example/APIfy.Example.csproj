@@ -151,13 +151,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\APIfy.Core\APIfy.Core.csproj">
-      <Project>{ae1e4610-419e-4e07-8c1d-fa02cfd9d063}</Project>
-      <Name>APIfy.Core</Name>
+    <ProjectReference Include="..\APIfy.Controllers\APIfy.Controllers.csproj">
+      <Project>{3280b98c-bf42-439e-a982-ece4ab1a7f99}</Project>
+      <Name>APIfy.Controllers</Name>
     </ProjectReference>
     <ProjectReference Include="..\APIfy.Database\APIfy.Database.csproj">
       <Project>{05783398-85f5-4419-8e01-d46dc662c588}</Project>
       <Name>APIfy.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\APIfy.Repositories\APIfy.Repositories.csproj">
+      <Project>{0fa01b4d-f203-4ea3-a5c2-67b5463c8eb8}</Project>
+      <Name>APIfy.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

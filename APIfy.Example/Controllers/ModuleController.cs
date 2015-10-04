@@ -3,7 +3,7 @@ using System.Web.Http;
 using APIfy.Database.Contexts;
 using APIfy.Database.Models;
 using APIfy.Example.Filters;
-using APIfy.Core.Controllers;
+using APIfy.Controllers;
 
 namespace APIfy.Example.Controllers
 {
